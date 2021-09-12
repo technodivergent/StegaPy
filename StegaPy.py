@@ -5,7 +5,7 @@ import argparse
 # define a delimiter to identify the end of the message
 delim = "$73G4PY"
 
-class StegPyImage:
+class StegaPyImage:
     def __init__(self, path):
         # Import the image, define the image's dimensions and convert image to a numpy array
         img = Image.open(path, 'r')
@@ -25,8 +25,8 @@ class StegPyImage:
         self.totalPixels = self.array.size//self.dimension
 
 def encode(source: str, message: str, destination: str) -> str:
-    # Create a StegPyImage object from the source image
-    img = StegPyImage(source)
+    # Create a StegaPyImage object from the source image
+    img = StegaPyImage(source)
 
     # Add a delimiter so we know when message ends, then
     # Convert it to binary, then
@@ -48,7 +48,7 @@ def encode(source: str, message: str, destination: str) -> str:
         encodedImage.save(destination)
         print("Image successfully saved")
 
-def inject_message(img: StegPyImage, requiredPixels: int, message: str):
+def inject_message(img: StegaPyImage, requiredPixels: int, message: str) -> StegaPyImage:
     i = 0
     for p in range(img.totalPixels):
         for q in range(0, 3):
@@ -58,7 +58,7 @@ def inject_message(img: StegPyImage, requiredPixels: int, message: str):
     imgArray = img.array.reshape(img.height, img.width, img.dimension)
     return imgArray
 
-def getInjectedBits(img: StegPyImage) -> list:
+def getInjectedBits(img: StegaPyImage) -> list:
     stegBits = ""
     for p in range(img.totalPixels):
         for q in range(0, 3):
@@ -67,7 +67,7 @@ def getInjectedBits(img: StegPyImage) -> list:
     stegBits = [stegBits[i:i+8] for i in range(0, len(stegBits), 8)]
     return stegBits
 
-def getMessage(img: StegPyImage) -> str:
+def getMessage(img: StegaPyImage) -> str:
     stegBits = getInjectedBits(img)
     message = ""
     for i in range(len(stegBits)):
@@ -83,8 +83,8 @@ def getMessage(img: StegPyImage) -> str:
     return message
 
 def decode(source: str) -> str:
-    # Create a StegPyImage object from the source image
-    img = StegPyImage(source)
+    # Create a StegaPyImage object from the source image
+    img = StegaPyImage(source)
     message = getMessage(img)
     return message
 
