@@ -22,6 +22,6 @@ To encode a secret message using the provided lock.png image:
 `python StegaPy.py -e -s lock.png -m "SECRET MESSAGE" -o lock-encoded.png`
 
 ### Decoding
-To decode a message that has been inserted into an image using the previous command:
+To decode a message that has been inserted into an image:
 
 `python StegaPy.py -d -s lock-encoded.png`
