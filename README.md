@@ -16,4 +16,5 @@ Use `python StegaPy.py -h` to get a full list of arguments
                         Enter the destination file name
 ```
 ## Example
-To encode a secret message using the provided lock.png image, use `python StegaPy.py -e -s lock.png -m "SECRET MESSAGE" -o lock-encoded.png`
+To encode a secret message using the provided lock.png image:
+`python StegaPy.py -e -s lock.png -m "SECRET MESSAGE" -o lock-encoded.png`
